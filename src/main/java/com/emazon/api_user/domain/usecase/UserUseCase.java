@@ -6,7 +6,7 @@ import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.domain.model.UserSave;
 import com.emazon.api_user.domain.spi.IRolPersistencePort;
 import com.emazon.api_user.domain.spi.IUserPersistencePort;
-import com.emazon.api_user.domain.util.Constans;
+import com.emazon.api_user.domain.util.Constants;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -24,30 +24,30 @@ public class UserUseCase implements IUserServicePort {
     }
 
     @Override
-    public void saveUser(UserSave userSave) {
+    public void saveUser(UserSave userSave, String role) {
         isIntegerDocument(userSave.getDocumentNumber());
         validateEmailStructure(userSave.getEmail());
         validPhoneStructure(userSave.getCellPhone());
         validationYear(userSave.getBirthdate());
         validatedEmailPresent(userSave.getEmail());
-        userPersistencePort.saveUser(userSaveBuilder(userSave));
+        userPersistencePort.saveUser(userSaveBuilder(userSave,role));
     }
 
     private void isIntegerDocument(String value) {
-        if (!value.matches(Constans.REGEX_DOCUMENT)) {
+        if (!value.matches(Constants.REGEX_DOCUMENT)) {
             throw new DocumentInvalidException();
         }
     }
 
     private void validateEmailStructure(String email){
-        Matcher matcher = Constans.EMAIL_PATTERN.matcher(email);
+        Matcher matcher = Constants.EMAIL_PATTERN.matcher(email);
         if (!matcher.matches()) {
             throw new UserEmailInvalidException();
         }
     }
 
     private void validPhoneStructure(String phoneNumber) {
-        Matcher matcher = Constans.PHONE_PATTERN.matcher(phoneNumber);
+        Matcher matcher = Constants.PHONE_PATTERN.matcher(phoneNumber);
         if (!matcher.matches()) {
             throw new PhoneNumberinvalidException();
         }
@@ -57,7 +57,7 @@ public class UserUseCase implements IUserServicePort {
         LocalDate today = LocalDate.now();
         int age = Period.between(birthDate, today).getYears();
 
-        if(age < Constans.VALUE_18){
+        if(age < Constants.VALUE_18){
             throw new MinorInvalidException();
         }
     }
@@ -68,7 +68,7 @@ public class UserUseCase implements IUserServicePort {
         }
     }
 
-    private UserSave userSaveBuilder(UserSave userSave){
+    private UserSave userSaveBuilder(UserSave userSave,String role){
         return UserSave.builder()
                 .setName(userSave.getName())
                 .setLastName(userSave.getLastName())
@@ -77,15 +77,22 @@ public class UserUseCase implements IUserServicePort {
                 .setBirthdate(userSave.getBirthdate())
                 .setEmail(userSave.getEmail())
                 .setPassword(this.userPersistencePort.encryptedPassword(userSave.getPassword()))
-                .setRol(getRol())
+                .setRol(setRol(role))
                 .build();
     }
 
-    private RolSave getRol(){
-        RolSave rolSave =  this.rolPersistencePort.getRolByName(Constans.AUX_BODEGA);
+    private RolSave setRol(String role){
+        RolSave rolSave =  this.rolPersistencePort.getRolByName(getRol(role));
         if(rolSave == null){
             throw new RolAuxBodegaInvalidException();
         }
         return rolSave;
+    }
+
+    String getRol(String role) {
+        if(role.equals(Constants.AUX_WAREHOUSE)){
+            return Constants.AUX_WAREHOUSE;
+        }
+        return Constants.CLIENT;
     }
 }

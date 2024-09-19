@@ -5,8 +5,7 @@ import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.domain.model.UserSave;
 import com.emazon.api_user.domain.spi.IRolPersistencePort;
 import com.emazon.api_user.domain.spi.IUserPersistencePort;
-import com.emazon.api_user.domain.util.Constans;
-import com.emazon.api_user.domain.util.ConstantsDomain;
+import com.emazon.api_user.domain.util.ConstantsDomainTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -35,166 +34,189 @@ class UserUseCaseTest {
     }
 
     @Test
-    void shouldCallSaveUserInPersistencePort() {
-        RolSave rolSave = new RolSave(ConstantsDomain.ROL_ID, ConstantsDomain.ROL_NAME
-                , ConstantsDomain.ROL_DESCRIPTION);
+    void shouldCallSaveUserAuxInPersistencePort() {
+        RolSave rolSave = new RolSave(ConstantsDomainTest.ROL_ID, ConstantsDomainTest.ROL_NAME
+                , ConstantsDomainTest.ROL_DESCRIPTION);
         UserSave userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.DOCUMENT)
-                .setCellPhone(ConstantsDomain.CELLPHONE)
-                .setBirthdate(ConstantsDomain.BIRTHDATE)
-                .setEmail(ConstantsDomain.EMAIL)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.DOCUMENT)
+                .setCellPhone(ConstantsDomainTest.CELLPHONE)
+                .setBirthdate(ConstantsDomainTest.BIRTHDATE)
+                .setEmail(ConstantsDomainTest.EMAIL)
+                .setPassword(ConstantsDomainTest.PASSWORD)
                 .build();
-        when(rolPersistencePort.getRolByName(Constans.AUX_BODEGA)).thenReturn(rolSave);
+        when(rolPersistencePort.getRolByName(ConstantsDomainTest.AUX_BODEGA)).thenReturn(rolSave);
 
-        userUseCase.saveUser(userSave);
+        userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_1))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomain.VALUE_1))
-                .getRolByName(ConstantsDomain.AUX_BODEGA);
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+                .getRolByName(ConstantsDomainTest.ROLE_AUX);
+    }
+
+    @Test
+    void shouldCallSaveUserClientInPersistencePort() {
+        RolSave rolSave = new RolSave(ConstantsDomainTest.ROL_ID, ConstantsDomainTest.ROL_NAME
+                , ConstantsDomainTest.ROL_DESCRIPTION);
+        UserSave userSave = UserSave.builder()
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.DOCUMENT)
+                .setCellPhone(ConstantsDomainTest.CELLPHONE)
+                .setBirthdate(ConstantsDomainTest.BIRTHDATE)
+                .setEmail(ConstantsDomainTest.EMAIL)
+                .setPassword(ConstantsDomainTest.PASSWORD)
+                .build();
+        when(rolPersistencePort.getRolByName(ConstantsDomainTest.ROLE_CLIENT)).thenReturn(rolSave);
+
+        userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_CLIENT);
+
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+                .encryptedPassword(userSave.getPassword());
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+                .getRolByName(ConstantsDomainTest.ROLE_CLIENT);
     }
 
     @Test
     void shouldThrowsExceptionWhenIsMenor() {
         UserSave userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.DOCUMENT)
-                .setCellPhone(ConstantsDomain.CELLPHONE)
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.DOCUMENT)
+                .setCellPhone(ConstantsDomainTest.CELLPHONE)
                 .setBirthdate(LocalDate.now())
-                .setEmail(ConstantsDomain.EMAIL)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setEmail(ConstantsDomainTest.EMAIL)
+                .setPassword(ConstantsDomainTest.PASSWORD)
                 .build();
 
         assertThrows(MinorInvalidException.class, () -> {
-            userUseCase.saveUser(userSave);
+            userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
-                .getRolByName(ConstantsDomain.AUX_BODEGA);
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+                .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
     @Test
     void shouldThrowsExceptionWhenDocumentNotNumber() {
         UserSave userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.LAST_NAME)
-                .setCellPhone(ConstantsDomain.CELLPHONE)
-                .setBirthdate(ConstantsDomain.BIRTHDATE)
-                .setEmail(ConstantsDomain.EMAIL)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.LAST_NAME)
+                .setCellPhone(ConstantsDomainTest.CELLPHONE)
+                .setBirthdate(ConstantsDomainTest.BIRTHDATE)
+                .setEmail(ConstantsDomainTest.EMAIL)
+                .setPassword(ConstantsDomainTest.PASSWORD)
                 .build();
 
         assertThrows(DocumentInvalidException.class, () -> {
-            userUseCase.saveUser(userSave);
+            userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
-                .getRolByName(ConstantsDomain.AUX_BODEGA);
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+                .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
     @Test
     void shouldThrowsExceptionWhenEmailIsInvalid() {
         UserSave userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.DOCUMENT)
-                .setCellPhone(ConstantsDomain.CELLPHONE)
-                .setBirthdate(ConstantsDomain.BIRTHDATE)
-                .setEmail(ConstantsDomain.PASSWORD)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.DOCUMENT)
+                .setCellPhone(ConstantsDomainTest.CELLPHONE)
+                .setBirthdate(ConstantsDomainTest.BIRTHDATE)
+                .setEmail(ConstantsDomainTest.PASSWORD)
+                .setPassword(ConstantsDomainTest.PASSWORD)
                 .build();
 
         assertThrows(UserEmailInvalidException.class, () -> {
-            userUseCase.saveUser(userSave);
+            userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
-                .getRolByName(ConstantsDomain.AUX_BODEGA);
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+                .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
     @Test
     void shouldThrowsExceptionWhenEmailIsPresent() {
         UserSave userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.DOCUMENT)
-                .setCellPhone(ConstantsDomain.CELLPHONE)
-                .setBirthdate(ConstantsDomain.BIRTHDATE)
-                .setEmail(ConstantsDomain.EMAIL)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.DOCUMENT)
+                .setCellPhone(ConstantsDomainTest.CELLPHONE)
+                .setBirthdate(ConstantsDomainTest.BIRTHDATE)
+                .setEmail(ConstantsDomainTest.EMAIL)
+                .setPassword(ConstantsDomainTest.PASSWORD)
                 .build();
-        when(userPersistencePort.getUserByEmail(ConstantsDomain.EMAIL)).thenReturn(ConstantsDomain.VALUE_TRUE);
+        when(userPersistencePort.getUserByEmail(ConstantsDomainTest.EMAIL)).thenReturn(ConstantsDomainTest.VALUE_TRUE);
 
         assertThrows(UserAlreadyExistsException.class, () -> {
-            userUseCase.saveUser(userSave);
+            userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_1))
-                .getUserByEmail(ConstantsDomain.EMAIL);
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+                .getUserByEmail(ConstantsDomainTest.EMAIL);
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
-                .getRolByName(ConstantsDomain.AUX_BODEGA);
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+                .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
     @Test
     void shouldThrowsExceptionWhenPhoneIsInvalid() {
         UserSave userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.DOCUMENT)
-                .setCellPhone(ConstantsDomain.EMAIL)
-                .setBirthdate(ConstantsDomain.BIRTHDATE)
-                .setEmail(ConstantsDomain.EMAIL)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.DOCUMENT)
+                .setCellPhone(ConstantsDomainTest.EMAIL)
+                .setBirthdate(ConstantsDomainTest.BIRTHDATE)
+                .setEmail(ConstantsDomainTest.EMAIL)
+                .setPassword(ConstantsDomainTest.PASSWORD)
                 .build();
 
         assertThrows(PhoneNumberinvalidException.class, () -> {
-            userUseCase.saveUser(userSave);
+            userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomain.VALUE_0))
-                .getRolByName(ConstantsDomain.AUX_BODEGA);
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+                .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
     @Test
     void shouldThrowsExceptionWhenRolNotExist() {
         RolSave rolSave = null;
         UserSave userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.DOCUMENT)
-                .setCellPhone(ConstantsDomain.CELLPHONE)
-                .setBirthdate(ConstantsDomain.BIRTHDATE)
-                .setEmail(ConstantsDomain.EMAIL)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setName(ConstantsDomainTest.NAME)
+                .setLastName(ConstantsDomainTest.LAST_NAME)
+                .setDocumentNumber(ConstantsDomainTest.DOCUMENT)
+                .setCellPhone(ConstantsDomainTest.CELLPHONE)
+                .setBirthdate(ConstantsDomainTest.BIRTHDATE)
+                .setEmail(ConstantsDomainTest.EMAIL)
+                .setPassword(ConstantsDomainTest.PASSWORD)
                 .build();
-        when(rolPersistencePort.getRolByName(Constans.AUX_BODEGA)).thenReturn(rolSave);
+        when(rolPersistencePort.getRolByName(ConstantsDomainTest.AUX_BODEGA)).thenReturn(rolSave);
 
         assertThrows(RolAuxBodegaInvalidException.class, () -> {
-            userUseCase.saveUser(userSave);
+            userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomain.VALUE_1))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomain.VALUE_1))
-                .getRolByName(ConstantsDomain.AUX_BODEGA);
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+                .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 }

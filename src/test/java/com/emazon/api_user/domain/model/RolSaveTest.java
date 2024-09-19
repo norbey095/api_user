@@ -1,6 +1,6 @@
 package com.emazon.api_user.domain.model;
 
-import com.emazon.api_user.domain.util.ConstantsDomain;
+import com.emazon.api_user.domain.util.ConstantsDomainTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -11,25 +11,25 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
     @Test
     void shouldCreateUserConstructor() {
-        RolSave rolSave = new RolSave(ConstantsDomain.ROL_ID, ConstantsDomain.ROL_NAME
-                , ConstantsDomain.ROL_DESCRIPTION);
+        RolSave rolSave = new RolSave(ConstantsDomainTest.ROL_ID, ConstantsDomainTest.ROL_NAME
+                , ConstantsDomainTest.ROL_DESCRIPTION);
 
         assertNotNull(rolSave);
-        assertEquals(ConstantsDomain.ROL_ID, rolSave.getId());
-        assertEquals(ConstantsDomain.ROL_NAME, rolSave.getName());
-        assertEquals(ConstantsDomain.ROL_DESCRIPTION, rolSave.getDescription());
+        assertEquals(ConstantsDomainTest.ROL_ID, rolSave.getId());
+        assertEquals(ConstantsDomainTest.ROL_NAME, rolSave.getName());
+        assertEquals(ConstantsDomainTest.ROL_DESCRIPTION, rolSave.getDescription());
     }
 
      @Test
      void shouldCreateUserSet() {
          RolSave rolSave = new RolSave();
-         rolSave.setId(ConstantsDomain.ROL_ID);
-         rolSave.setName(ConstantsDomain.ROL_NAME);
-         rolSave.setDescription(ConstantsDomain.ROL_DESCRIPTION);
+         rolSave.setId(ConstantsDomainTest.ROL_ID);
+         rolSave.setName(ConstantsDomainTest.ROL_NAME);
+         rolSave.setDescription(ConstantsDomainTest.ROL_DESCRIPTION);
 
          assertNotNull(rolSave);
-         assertEquals(ConstantsDomain.ROL_ID, rolSave.getId());
-         assertEquals(ConstantsDomain.ROL_NAME, rolSave.getName());
-         assertEquals(ConstantsDomain.ROL_DESCRIPTION, rolSave.getDescription());
+         assertEquals(ConstantsDomainTest.ROL_ID, rolSave.getId());
+         assertEquals(ConstantsDomainTest.ROL_NAME, rolSave.getName());
+         assertEquals(ConstantsDomainTest.ROL_DESCRIPTION, rolSave.getDescription());
      }
 }
