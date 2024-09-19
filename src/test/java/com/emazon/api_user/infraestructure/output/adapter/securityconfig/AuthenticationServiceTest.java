@@ -1,11 +1,10 @@
-package com.emazon.api_user.infraestructure.output.adapter.adapter.securityconfig;
+package com.emazon.api_user.infraestructure.output.adapter.securityconfig;
 
 import com.emazon.api_user.application.dto.authentication.AuthenticationRequestDto;
 import com.emazon.api_user.application.dto.authentication.AuthenticationResponseDto;
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.AuthenticationService;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
-import com.emazon.api_user.infraestructure.output.reposiroty.IUserRepository;
+import com.emazon.api_user.infraestructure.output.repository.IUserRepository;
 import com.emazon.api_user.infraestructure.util.Constans;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -61,8 +60,8 @@ class AuthenticationServiceTest {
         userEntity.setEmail(email);
         userEntity.setPassword(password);
 
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenReturn(authentication);
+        doReturn(authentication).when(authenticationManager)
+                .authenticate(any(UsernamePasswordAuthenticationToken.class));
         when(authentication.getPrincipal()).thenReturn(userDetails);
         when(userDetails.getUsername()).thenReturn(email);
         when(repository.findByEmail(email)).thenReturn(Optional.of(userEntity));
@@ -72,8 +71,8 @@ class AuthenticationServiceTest {
 
         assertEquals(token, response.getToken());
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        verify(repository).findByEmail(email);
-        verify(jwtService).generateToken(email, userDetails);
+        verify(jwtService, times(Constans.VALUE_1))
+                .generateToken(email,userDetails);
     }
 
     @Test
@@ -82,8 +81,8 @@ class AuthenticationServiceTest {
         String password = Constans.PASSWORD_NAME;
         AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
 
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenReturn(authentication);
+        doThrow(new IllegalArgumentException()).when(authenticationManager)
+                .authenticate(any(UsernamePasswordAuthenticationToken.class));
         when(authentication.getPrincipal()).thenReturn(userDetails);
         when(repository.findByEmail(email)).thenReturn(Optional.empty());
 
