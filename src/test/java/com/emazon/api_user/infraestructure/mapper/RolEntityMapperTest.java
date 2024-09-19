@@ -1,8 +1,8 @@
 package com.emazon.api_user.infraestructure.mapper;
 
 import com.emazon.api_user.domain.model.RolSave;
-import com.emazon.api_user.infraestructure.output.jpa.entity.RolEntity;
-import com.emazon.api_user.infraestructure.output.jpa.mapper.RolEntityMapper;
+import com.emazon.api_user.infraestructure.output.entity.RolEntity;
+import com.emazon.api_user.infraestructure.output.mapper.RolEntityMapper;
 import com.emazon.api_user.infraestructure.util.Constans;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -15,8 +15,10 @@ class RolEntityMapperTest {
 
     @Test
     void testRolEntityToRolSave() {
-        RolEntity rolEntity = new RolEntity(Constans.ROL_ID, Constans.ROL_NAME
-                , Constans.ROL_DESCRIPTION);
+        RolEntity rolEntity = new RolEntity();
+        rolEntity.setId(Constans.ROL_ID);
+        rolEntity.setName( Constans.ROL_NAME);
+        rolEntity.setDescription(Constans.ROL_DESCRIPTION);
 
         RolSave rolSave = rolEntityMapper.rolEntityToRolSave(rolEntity);
 

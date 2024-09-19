@@ -1,10 +1,10 @@
-package com.emazon.api_user.infraestructure.output.jpa.adapter;
+package com.emazon.api_user.infraestructure.output.adapter;
 
 
 import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.domain.spi.IRolPersistencePort;
-import com.emazon.api_user.infraestructure.output.jpa.mapper.RolEntityMapper;
-import com.emazon.api_user.infraestructure.output.jpa.repository.IRolRepository;
+import com.emazon.api_user.infraestructure.output.mapper.RolEntityMapper;
+import com.emazon.api_user.infraestructure.output.repository.IRolRepository;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

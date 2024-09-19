@@ -1,9 +1,12 @@
-package com.emazon.api_user.infraestructure.output.jpa.entity;
+package com.emazon.api_user.infraestructure.output.entity;
 
+import com.emazon.api_user.infraestructure.output.util.Constants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name = "rol")
@@ -17,4 +20,6 @@ public class RolEntity {
     private Integer id;
     private String name;
     private String description;
+    @OneToMany(mappedBy = Constants.ROL, fetch = FetchType.LAZY)
+    private List<UserEntity> users;
 }

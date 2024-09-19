@@ -3,9 +3,13 @@ package com.emazon.api_user.infraestructure.exceptionhandler;
 import com.emazon.api_user.domain.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.nio.file.AccessDeniedException;
+import java.time.format.DateTimeParseException;
 
 @ControllerAdvice
 public class ControllerUserAdvisor {
@@ -67,6 +71,27 @@ public class ControllerUserAdvisor {
     public ResponseEntity<ExceptionResponse> handleDocumentInvalidException(DocumentInvalidException exception) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(
                 ExceptionResponseConstants.DOCUMENT_NUMBER_POSITIVE.getMessage(),
+                HttpStatus.BAD_REQUEST.toString()));
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ExceptionResponse> handleBadCredentialsException (BadCredentialsException  exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionResponse(
+                ExceptionResponseConstants.INCORRECT_DATA.getMessage(),
+                HttpStatus.UNAUTHORIZED.toString()));
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ExceptionResponse> handleAccessDeniedException (AccessDeniedException  exception) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(new ExceptionResponse(
+                ExceptionResponseConstants.ACCESS_DENE.getMessage(),
+                HttpStatus.FORBIDDEN.toString()));
+    }
+
+    @ExceptionHandler(DateTimeParseException.class)
+    public ResponseEntity<ExceptionResponse> handleDateTimeParseException(DateTimeParseException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(
+                ExceptionResponseConstants.FORMAT_DATE_INVALID.getMessage(),
                 HttpStatus.BAD_REQUEST.toString()));
     }
 }

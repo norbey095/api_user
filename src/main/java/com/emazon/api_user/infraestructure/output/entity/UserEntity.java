@@ -1,5 +1,6 @@
-package com.emazon.api_user.infraestructure.output.jpa.entity;
+package com.emazon.api_user.infraestructure.output.entity;
 
+import com.emazon.api_user.infraestructure.output.util.Constants;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,15 +19,16 @@ public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
-    @Column(name = "last_name")
+    @Column(name = Constants.LAST_NAME)
     private String lastName;
-    @Column(name = "document_number")
+    @Column(name = Constants.DOCUMENT_NUMBER)
     private Integer documentNumber;
-    @Column(name = "cell_phone")
+    @Column(name = Constants.CELL_PHONE)
     private String cellPhone;
     private LocalDate birthdate;
     private String email;
     private String password;
-    @Column(name = "id_rol")
-    private Integer idRol;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = Constants.ID_ROL)
+    private RolEntity rol;
 }

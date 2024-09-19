@@ -1,4 +1,4 @@
-package com.emazon.api_user.infraestructure.output.jpa.util;
+package com.emazon.api_user.infraestructure.output.util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
