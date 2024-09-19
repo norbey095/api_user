@@ -9,7 +9,10 @@ public enum ExceptionResponseConstants {
     USER_PHONE_CORRECT("Invalid phone format"),
     MINOR_INVALID("The user must not be a minor"),
     ROL_AUX_BODE_EXISTS("The role aux_bodega does not exist in the system"),
-    DOCUMENT_NUMBER_POSITIVE ("The ID document must be a positive number");
+    DOCUMENT_NUMBER_POSITIVE ("The ID document must be a positive number"),
+    INCORRECT_DATA("Incorrect login information"),
+    ACCESS_DENE("Access denied"),
+    FORMAT_DATE_INVALID ("The date format is invalid, the format is yyyy-mm-dd");
 
     private final String message;
 

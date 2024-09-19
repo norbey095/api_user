@@ -1,8 +1,9 @@
 package com.emazon.api_user.infraestructure.mapper;
 
+import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.domain.model.UserSave;
-import com.emazon.api_user.infraestructure.output.jpa.entity.UserEntity;
-import com.emazon.api_user.infraestructure.output.jpa.mapper.UserEntityMapper;
+import com.emazon.api_user.infraestructure.output.entity.UserEntity;
+import com.emazon.api_user.infraestructure.output.mapper.UserEntityMapper;
 import com.emazon.api_user.infraestructure.util.Constans;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
@@ -23,6 +24,7 @@ class UserEntityMapperTest {
                 .setBirthdate(Constans.BIRTHDATE)
                 .setEmail(Constans.EMAIL)
                 .setPassword(Constans.PASSWORD)
+                .setRol(new RolSave(Constans.ROL_ID,Constans.NAME,Constans.ROL_DESCRIPTION))
                 .build();
 
         UserEntity userEntity = userEntityMapper.userToUserEntity(userSave);

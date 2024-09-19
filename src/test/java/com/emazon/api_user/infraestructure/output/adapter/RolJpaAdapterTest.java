@@ -1,13 +1,15 @@
-package com.emazon.api_user.infraestructure.output.jpa.adapter;
+package com.emazon.api_user.infraestructure.output.adapter;
 
 import com.emazon.api_user.domain.model.RolSave;
-import com.emazon.api_user.infraestructure.output.jpa.entity.RolEntity;
-import com.emazon.api_user.infraestructure.output.jpa.mapper.RolEntityMapper;
-import com.emazon.api_user.infraestructure.output.jpa.repository.IRolRepository;
+import com.emazon.api_user.infraestructure.output.entity.RolEntity;
+import com.emazon.api_user.infraestructure.output.mapper.RolEntityMapper;
+import com.emazon.api_user.infraestructure.output.repository.IRolRepository;
 import com.emazon.api_user.infraestructure.util.Constans;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -31,7 +33,7 @@ class RolJpaAdapterTest {
     @Test
     void testGetRolByNameSuccess() {
         RolEntity rolEntity = new RolEntity(Constans.ROL_ID, Constans.ROL_NAME
-                , Constans.ROL_DESCRIPTION);
+                , Constans.ROL_DESCRIPTION, new ArrayList<>());
         RolSave rolSave = new RolSave(Constans.ROL_ID, Constans.ROL_NAME
                 , Constans.ROL_DESCRIPTION);
         Mockito.when(rolRepository.getRolByName(Constans.NAME))

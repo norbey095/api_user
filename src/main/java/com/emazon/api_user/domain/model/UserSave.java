@@ -10,7 +10,7 @@ public class UserSave {
     private LocalDate birthdate;
     private String email;
     private String password;
-    private Integer idRol;
+    private RolSave rol;
 
     private UserSave(UserBuilder builder) {
         this.name = builder.name;
@@ -20,7 +20,7 @@ public class UserSave {
         this.birthdate = builder.birthdate;
         this.email = builder.email;
         this.password = builder.password;
-        this.idRol = builder.idRol;
+        this.rol = builder.rol;
     }
 
     public String getName() { return name; }
@@ -30,7 +30,7 @@ public class UserSave {
     public LocalDate getBirthdate() { return birthdate; }
     public String getEmail() { return email; }
     public String getPassword() { return password; }
-    public Integer getIdRol() { return idRol; }
+    public RolSave getRol() { return rol; }
 
     public static UserBuilder builder() {
         return new UserBuilder();
@@ -44,7 +44,7 @@ public class UserSave {
         private LocalDate birthdate;
         private String email;
         private String password;
-        private Integer idRol;
+        private RolSave rol;
 
         public UserBuilder setName(String name) {
             this.name = name;
@@ -81,8 +81,8 @@ public class UserSave {
             return this;
         }
 
-        public UserBuilder setIdRol(Integer idRol) {
-            this.idRol = idRol;
+        public UserBuilder setRol(RolSave rol) {
+            this.rol = rol;
             return this;
         }
 
