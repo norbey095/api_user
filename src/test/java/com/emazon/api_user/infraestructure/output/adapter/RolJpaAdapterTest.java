@@ -4,7 +4,7 @@ import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.infraestructure.output.entity.RolEntity;
 import com.emazon.api_user.infraestructure.output.mapper.RolEntityMapper;
 import com.emazon.api_user.infraestructure.output.repository.IRolRepository;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -32,16 +32,16 @@ class RolJpaAdapterTest {
 
     @Test
     void testGetRolByNameSuccess() {
-        RolEntity rolEntity = new RolEntity(Constans.ROL_ID, Constans.ROL_NAME
-                , Constans.ROL_DESCRIPTION, new ArrayList<>());
-        RolSave rolSave = new RolSave(Constans.ROL_ID, Constans.ROL_NAME
-                , Constans.ROL_DESCRIPTION);
-        Mockito.when(rolRepository.getRolByName(Constans.NAME))
+        RolEntity rolEntity = new RolEntity(ConstantsInfTest.ROL_ID, ConstantsInfTest.ROL_NAME
+                , ConstantsInfTest.ROL_DESCRIPTION, new ArrayList<>());
+        RolSave rolSave = new RolSave(ConstantsInfTest.ROL_ID, ConstantsInfTest.ROL_NAME
+                , ConstantsInfTest.ROL_DESCRIPTION);
+        Mockito.when(rolRepository.getRolByName(ConstantsInfTest.NAME))
                 .thenReturn(rolEntity);
         Mockito.when(rolEntityMapper.rolEntityToRolSave(rolEntity))
                 .thenReturn(rolSave);
 
-        RolSave result = rolJpaAdapter.getRolByName(Constans.NAME);
+        RolSave result = rolJpaAdapter.getRolByName(ConstantsInfTest.NAME);
 
         assertEquals(result.getId(),rolEntity.getId());
         assertEquals(result.getName(),rolEntity.getName());

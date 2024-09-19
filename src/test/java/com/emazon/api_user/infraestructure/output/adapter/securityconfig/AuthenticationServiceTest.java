@@ -5,7 +5,7 @@ import com.emazon.api_user.application.dto.authentication.AuthenticationResponse
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
 import com.emazon.api_user.infraestructure.output.repository.IUserRepository;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -50,11 +50,11 @@ class AuthenticationServiceTest {
 
     @Test
     void testAuthenticate_Success() {
-        String email = Constans.EMAIL_EJEM;
-        String password = Constans.PASSWORD_NAME;
+        String email = ConstantsInfTest.EMAIL_EJEM;
+        String password = ConstantsInfTest.PASSWORD_NAME;
 
         AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
-        String token = Constans.JWTTOKEN;
+        String token = ConstantsInfTest.JWTTOKEN;
 
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(email);
@@ -71,14 +71,14 @@ class AuthenticationServiceTest {
 
         assertEquals(token, response.getToken());
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        verify(jwtService, times(Constans.VALUE_1))
+        verify(jwtService, times(ConstantsInfTest.VALUE_1))
                 .generateToken(email,userDetails);
     }
 
     @Test
     void testAuthenticate_UserNotFound() {
-        String email = Constans.EMAIL_EJEM;
-        String password = Constans.PASSWORD_NAME;
+        String email = ConstantsInfTest.EMAIL_EJEM;
+        String password = ConstantsInfTest.PASSWORD_NAME;
         AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
 
         doThrow(new IllegalArgumentException()).when(authenticationManager)

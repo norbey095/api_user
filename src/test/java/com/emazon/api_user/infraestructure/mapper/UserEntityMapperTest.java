@@ -4,7 +4,7 @@ import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.domain.model.UserSave;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
 import com.emazon.api_user.infraestructure.output.mapper.UserEntityMapper;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
@@ -17,14 +17,14 @@ class UserEntityMapperTest {
     @Test
     void testUserToUserEntity() {
         UserSave userSave = UserSave.builder()
-                .setName(Constans.NAME)
-                .setLastName(Constans.LAST_NAME)
-                .setDocumentNumber(Constans.DOCUMENT)
-                .setCellPhone(Constans.EMAIL)
-                .setBirthdate(Constans.BIRTHDATE)
-                .setEmail(Constans.EMAIL)
-                .setPassword(Constans.PASSWORD)
-                .setRol(new RolSave(Constans.ROL_ID,Constans.NAME,Constans.ROL_DESCRIPTION))
+                .setName(ConstantsInfTest.NAME)
+                .setLastName(ConstantsInfTest.LAST_NAME)
+                .setDocumentNumber(ConstantsInfTest.DOCUMENT)
+                .setCellPhone(ConstantsInfTest.EMAIL)
+                .setBirthdate(ConstantsInfTest.BIRTHDATE)
+                .setEmail(ConstantsInfTest.EMAIL)
+                .setPassword(ConstantsInfTest.PASSWORD)
+                .setRol(new RolSave(ConstantsInfTest.ROL_ID, ConstantsInfTest.NAME, ConstantsInfTest.ROL_DESCRIPTION))
                 .build();
 
         UserEntity userEntity = userEntityMapper.userToUserEntity(userSave);

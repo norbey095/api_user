@@ -4,14 +4,11 @@ import com.emazon.api_user.application.dto.ResponseSuccess;
 import com.emazon.api_user.application.dto.UserRequestDto;
 import com.emazon.api_user.application.handler.IUserHandler;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
-import com.emazon.api_user.infraestructure.util.Constans;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -34,15 +31,28 @@ class UserRestControllerTest {
     private JwtService jwtService;
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
-    void createUser_ShouldReturnStatusCreated() throws Exception {
-        ResponseSuccess responseSuccess = new ResponseSuccess(Constans.MESSAGESS_SUCCESS);
-        Mockito.when(userHandler.saveUser(Mockito.any(UserRequestDto.class)))
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
+    void createUserAux_ShouldReturnStatusCreated() throws Exception {
+        ResponseSuccess responseSuccess = new ResponseSuccess(ConstantsInfTest.MESSAGESS_SUCCESS);
+        Mockito.when(userHandler.saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class)))
                 .thenReturn(responseSuccess);
 
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
+                .andExpect(MockMvcResultMatchers.status().isCreated());
+    }
+
+    @Test
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
+    void createUserClient_ShouldReturnStatusCreated() throws Exception {
+        ResponseSuccess responseSuccess = new ResponseSuccess(ConstantsInfTest.MESSAGESS_SUCCESS);
+        Mockito.when(userHandler.saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class)))
+                .thenReturn(responseSuccess);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_CLIENT)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }
 

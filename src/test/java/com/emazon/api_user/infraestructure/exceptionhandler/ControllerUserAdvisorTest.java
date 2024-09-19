@@ -4,7 +4,7 @@ import com.emazon.api_user.application.dto.UserRequestDto;
 import com.emazon.api_user.application.handler.IUserHandler;
 import com.emazon.api_user.domain.exception.*;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,121 +34,121 @@ class ControllerUserAdvisorTest {
 
     @Test
     void whenMethodArgumentNotValidException_thenReturnsBadRequest() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST_INCORRECT))
+                        .content(ConstantsInfTest.JSON_REQUEST_INCORRECT))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.NAME_EMPTY));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.NAME_EMPTY));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenUserAlreadyExistsException_thenReturnsConflict() throws Exception {
         Mockito.doThrow(new UserAlreadyExistsException()).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.MESSAGE_EMAIL));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.MESSAGE_EMAIL));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenUserEmailInvalidException_thenReturnsConflict() throws Exception {
         Mockito.doThrow(new UserEmailInvalidException()).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.USER_EMAIL_CORRECT));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.USER_EMAIL_CORRECT));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenPhoneNumberInvalidException_thenReturnsConflict() throws Exception {
         Mockito.doThrow(new PhoneNumberinvalidException()).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.USER_PHONE_CORRECT));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.USER_PHONE_CORRECT));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenMinorInvalidException_thenReturnsConflict() throws Exception {
         Mockito.doThrow(new MinorInvalidException()).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.MINOR_INVALID));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.MINOR_INVALID));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenRolAuxBodegaInvalidException_thenReturnsConflict() throws Exception {
         Mockito.doThrow(new RolAuxBodegaInvalidException()).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.ROL_AUX_BODE_EXISTS));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.ROL_AUX_BODE_EXISTS));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenDocumentInvalidException_thenReturnsConflict() throws Exception {
         Mockito.doThrow(new DocumentInvalidException()).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.DOCUMENT_NUMBER_POSITIVE));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.DOCUMENT_NUMBER_POSITIVE));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenBadCredentialsException_thenReturnsConflict() throws Exception {
-        Mockito.doThrow(new BadCredentialsException(Constans.INAUTHORIZATION)).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
+        Mockito.doThrow(new BadCredentialsException(ConstantsInfTest.INAUTHORIZATION)).when(userHandler)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
 
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.INAUTHORIZATION));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.INAUTHORIZATION));
     }
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenDateTimeParseException_thenReturnsConflict() throws Exception {
-        DateTimeParseException dateTimeParseException = new DateTimeParseException(Constans.DATE_TIME,
-                Constans.INPUT, Constans.VALUE_0);
+        DateTimeParseException dateTimeParseException = new DateTimeParseException(ConstantsInfTest.DATE_TIME,
+                ConstantsInfTest.INPUT, ConstantsInfTest.VALUE_0);
 
         Mockito.doThrow(dateTimeParseException).when(userHandler)
-                .saveUser(Mockito.any(UserRequestDto.class));
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
 
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
-                        .value(Constans.DATE_TIME));
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.DATE_TIME));
     }
 
 }

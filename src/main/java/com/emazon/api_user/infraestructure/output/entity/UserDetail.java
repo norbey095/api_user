@@ -1,6 +1,6 @@
 package com.emazon.api_user.infraestructure.output.entity;
 
-import com.emazon.api_user.infraestructure.output.util.Constants;
+import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,7 +18,7 @@ public class UserDetail implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Set.of(new SimpleGrantedAuthority(Constants.ROLE + userEntity.getRol().getName()));
+        return Set.of(new SimpleGrantedAuthority(ConstantsInfraestructure.ROLE + userEntity.getRol().getName()));
     }
 
     @Override

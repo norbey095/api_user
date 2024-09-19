@@ -3,7 +3,7 @@ package com.emazon.api_user.infraestructure.output.adapter.entity;
 import com.emazon.api_user.infraestructure.output.entity.RolEntity;
 import com.emazon.api_user.infraestructure.output.entity.UserDetail;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,11 +25,11 @@ class UserDetailTest {
     @BeforeEach
     public void setUp() {
         rolEntity = Mockito.mock(RolEntity.class);
-        rolEntity.setName(Constans.ROL_NAME);
+        rolEntity.setName(ConstantsInfTest.ROL_NAME);
 
         userEntity = Mockito.mock(UserEntity.class);
-        userEntity.setPassword(Constans.PASSWORD);
-        userEntity.setEmail(Constans.EMAIL);
+        userEntity.setPassword(ConstantsInfTest.PASSWORD);
+        userEntity.setEmail(ConstantsInfTest.EMAIL);
         userEntity.setRol(rolEntity);
 
         userDetail = new UserDetail(userEntity);
@@ -37,7 +37,7 @@ class UserDetailTest {
 
     @Test
     void testUserNameCorrect() {
-        Mockito.when(userEntity.getEmail()).thenReturn(Constans.EMAIL);
+        Mockito.when(userEntity.getEmail()).thenReturn(ConstantsInfTest.EMAIL);
         String userName = userDetail.getUsername();
 
         assertEquals(userName, userEntity.getEmail());
@@ -45,19 +45,19 @@ class UserDetailTest {
 
     @Test
     void testGetPassword() {
-        Mockito.when(userEntity.getPassword()).thenReturn(Constans.PASSWORD);
+        Mockito.when(userEntity.getPassword()).thenReturn(ConstantsInfTest.PASSWORD);
         String password = userDetail.getPassword();
 
-        assertEquals(Constans.PASSWORD, password);
+        assertEquals(ConstantsInfTest.PASSWORD, password);
     }
 
     @Test
     void testGetAuthorities() {
         Mockito.when(userEntity.getRol()).thenReturn(rolEntity);
-        Mockito.when(rolEntity.getName()).thenReturn(Constans.ROL_NAME);
+        Mockito.when(rolEntity.getName()).thenReturn(ConstantsInfTest.ROL_NAME);
         Collection<? extends GrantedAuthority> authorities = userDetail.getAuthorities();
 
-        assertEquals(Constans.ROL_ID, authorities.size());
-        assertTrue(authorities.contains(new SimpleGrantedAuthority(Constans.ROL_NAME_AUXILIAR)));
+        assertEquals(ConstantsInfTest.ROL_ID, authorities.size());
+        assertTrue(authorities.contains(new SimpleGrantedAuthority(ConstantsInfTest.ROL_NAME_AUXILIAR)));
     }
 }

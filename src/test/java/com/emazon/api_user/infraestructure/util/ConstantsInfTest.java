@@ -2,9 +2,9 @@ package com.emazon.api_user.infraestructure.util;
 
 import java.time.LocalDate;
 
-public class Constans {
+public class ConstantsInfTest {
 
-    public static final String URL_USER= "/user/registry";
+    public static final String URL_USER= "/user/registryAux";
     public static final String JSON_REQUEST= "{ \"name\": \"Constans\", \"lastName\": \"Constans\", " +
             "\"documentNumber\": \"123\", \"cellPhone\": \"3020302030\", \"birthdate\": \"2000-09-12\", " +
             "\"email\": \"teste@test.com\", \"password\": \"string\" }";
@@ -50,9 +50,10 @@ public class Constans {
     public static final Integer VALUE_0= 0;
     public static final String USER_NOT_FOUND_POINTS = "User not found: ";
     public static final Integer VALUE_1= 1;
+    public static final String URL_CLIENT= "/user/registryClient";
 
 
-    private Constans() {
+    private ConstantsInfTest() {
 
     }
 }
