@@ -4,7 +4,6 @@ import com.emazon.api_user.apilication.util.ConstantsApplicationTest;
 import com.emazon.api_user.application.dto.authentication.AuthenticationRequestDto;
 import com.emazon.api_user.application.handler.authetication.AuthenticationHandler;
 import com.emazon.api_user.domain.api.IAuthenticationServicePort;
-import com.emazon.api_user.domain.util.ConstantsDomainTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -40,7 +39,7 @@ class AuthenticationHandlerTest {
         authenticationHandler.authentication(authenticationRequestDto);
 
 
-        Mockito.verify(authenticationServicePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(authenticationServicePort, Mockito.times(ConstantsApplicationTest.VERIFY_1_CALL))
                 .authentication(ConstantsApplicationTest.EMAIL,
                         ConstantsApplicationTest.PASSWORD);
     }

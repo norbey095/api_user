@@ -13,6 +13,7 @@ public class ConstantsApplicationTest {
     public static final String PASSWORD= "1234";
     public static final String ROLE_AUX = "AUX";
     public static final String ROLE_CLIENT = "CLIENT";
+    public static final Integer VERIFY_1_CALL = 1;
 
     private ConstantsApplicationTest() {
 
