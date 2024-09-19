@@ -49,6 +49,7 @@ public class Constans {
     public static final String INPUT= "INPUT";
     public static final Integer VALUE_0= 0;
     public static final String USER_NOT_FOUND_POINTS = "User not found: ";
+    public static final Integer VALUE_1= 1;
 
 
     private Constans() {
