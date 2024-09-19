@@ -1,6 +1,6 @@
 package com.emazon.api_user.application.dto;
 
-import com.emazon.api_user.application.util.Constants;
+import com.emazon.api_user.application.util.ConstantsApplication;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -12,18 +12,18 @@ import java.time.LocalDate;
 @Data
 public class UserRequestDto {
 
-    @NotBlank(message = Constants.NAME_REQUIRED)
+    @NotBlank(message = ConstantsApplication.NAME_REQUIRED)
     private String name;
-    @NotBlank(message = Constants.LAST_NAME_REQUIRED)
+    @NotBlank(message = ConstantsApplication.LAST_NAME_REQUIRED)
     private String lastName;
-    @NotBlank(message = Constants.DOCUMENT_REQUIRED)
+    @NotBlank(message = ConstantsApplication.DOCUMENT_REQUIRED)
     private String documentNumber;
-    @NotBlank(message = Constants.CELLPHONE_REQUIRED)
+    @NotBlank(message = ConstantsApplication.CELLPHONE_REQUIRED)
     private String cellPhone;
-    @NotNull(message = Constants.BIRTHDATE_REQUIRED)
+    @NotNull(message = ConstantsApplication.BIRTHDATE_REQUIRED)
     private LocalDate birthdate;
-    @NotBlank(message = Constants.EMAIL_REQUIRED)
+    @NotBlank(message = ConstantsApplication.EMAIL_REQUIRED)
     private String email;
-    @NotBlank(message = Constants.PASSWORD_REQUIRED)
+    @NotBlank(message = ConstantsApplication.PASSWORD_REQUIRED)
     private String password;
 }

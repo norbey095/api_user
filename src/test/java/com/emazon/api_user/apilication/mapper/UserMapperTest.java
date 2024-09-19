@@ -1,9 +1,9 @@
 package com.emazon.api_user.apilication.mapper;
 
+import com.emazon.api_user.apilication.util.ConstantsApplicationTest;
 import com.emazon.api_user.application.dto.UserRequestDto;
 import com.emazon.api_user.application.mapper.UserMapper;
 import com.emazon.api_user.domain.model.UserSave;
-import com.emazon.api_user.domain.util.ConstantsDomain;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
@@ -17,13 +17,13 @@ class UserMapperTest {
     @Test
     void testUserRequestDtoToUserSave() {
         UserRequestDto userRequestDto = UserRequestDto.builder()
-                .name(ConstantsDomain.NAME)
-                .lastName(ConstantsDomain.LAST_NAME)
-                .documentNumber(ConstantsDomain.DOCUMENT)
-                .cellPhone(ConstantsDomain.CELLPHONE)
-                .birthdate(ConstantsDomain.BIRTHDATE)
-                .email(ConstantsDomain.EMAIL)
-                .password(ConstantsDomain.PASSWORD)
+                .name(ConstantsApplicationTest.NAME)
+                .lastName(ConstantsApplicationTest.LAST_NAME)
+                .documentNumber(ConstantsApplicationTest.DOCUMENT)
+                .cellPhone(ConstantsApplicationTest.CELLPHONE)
+                .birthdate(ConstantsApplicationTest.BIRTHDATE)
+                .email(ConstantsApplicationTest.EMAIL)
+                .password(ConstantsApplicationTest.PASSWORD)
                 .build();
 
         UserSave usertestSave = userMapper.userRequestDtoToUserSave(userRequestDto);
@@ -42,13 +42,13 @@ class UserMapperTest {
     @Test
     void testUserRequestDtoToUserSaveMap() {
         UserRequestDto userRequestDto = UserRequestDto.builder()
-                .name(ConstantsDomain.NAME)
-                .lastName(ConstantsDomain.LAST_NAME)
-                .documentNumber(ConstantsDomain.DOCUMENT)
-                .cellPhone(ConstantsDomain.CELLPHONE)
-                .birthdate(ConstantsDomain.BIRTHDATE)
-                .email(ConstantsDomain.EMAIL)
-                .password(ConstantsDomain.PASSWORD)
+                .name(ConstantsApplicationTest.NAME)
+                .lastName(ConstantsApplicationTest.LAST_NAME)
+                .documentNumber(ConstantsApplicationTest.DOCUMENT)
+                .cellPhone(ConstantsApplicationTest.CELLPHONE)
+                .birthdate(ConstantsApplicationTest.BIRTHDATE)
+                .email(ConstantsApplicationTest.EMAIL)
+                .password(ConstantsApplicationTest.PASSWORD)
                 .build();
 
         UserSave usertestSave = userMapper.map(userRequestDto);
