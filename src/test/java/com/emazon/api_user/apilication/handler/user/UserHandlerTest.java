@@ -1,8 +1,8 @@
-package com.emazon.api_user.apilication.handler;
+package com.emazon.api_user.apilication.handler.user;
 
 import com.emazon.api_user.apilication.util.ConstantsApplicationTest;
 import com.emazon.api_user.application.dto.UserRequestDto;
-import com.emazon.api_user.application.handler.UserHandler;
+import com.emazon.api_user.application.handler.user.UserHandler;
 import com.emazon.api_user.application.mapper.UserMapper;
 import com.emazon.api_user.domain.api.IUserServicePort;
 import com.emazon.api_user.domain.model.UserSave;

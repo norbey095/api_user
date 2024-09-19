@@ -50,9 +50,9 @@ class UserUseCaseTest {
 
         userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .getRolByName(ConstantsDomainTest.ROLE_AUX);
     }
 
@@ -73,9 +73,9 @@ class UserUseCaseTest {
 
         userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_CLIENT);
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .getRolByName(ConstantsDomainTest.ROLE_CLIENT);
     }
 
@@ -96,9 +96,9 @@ class UserUseCaseTest {
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
@@ -119,9 +119,9 @@ class UserUseCaseTest {
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
@@ -142,9 +142,9 @@ class UserUseCaseTest {
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
@@ -165,11 +165,11 @@ class UserUseCaseTest {
             userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .getUserByEmail(ConstantsDomainTest.EMAIL);
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
@@ -190,9 +190,9 @@ class UserUseCaseTest {
         });
 
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 
@@ -214,9 +214,9 @@ class UserUseCaseTest {
             userUseCase.saveUser(userSave, ConstantsDomainTest.ROLE_AUX);
         });
 
-        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(userPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .encryptedPassword(userSave.getPassword());
-        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(rolPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .getRolByName(ConstantsDomainTest.AUX_BODEGA);
     }
 }

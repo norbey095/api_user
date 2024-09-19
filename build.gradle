@@ -68,4 +68,16 @@ jacocoTestReport {
 		html.required.set(true)
 		csv.required.set(false)
 	}
+
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: [
+					'**/com/emazon/api_user/infraestructure/output/util/JwtService*',
+					'**/com/emazon/api_user/infraestructure/configuration/securityconfig/jwtconfiguration*',
+					'**/com/emazon/api_user/infraestructure/output/util*',
+					'**/com/emazon/api_user/infraestructure/util*',
+					'**/com/emazon/api_user/ApiUserApplication*'
+			])
+		}))
+	}
 }

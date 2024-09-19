@@ -1,9 +1,9 @@
 package com.emazon.api_user.infraestructure.exceptionhandler;
 
 import com.emazon.api_user.application.dto.UserRequestDto;
-import com.emazon.api_user.application.handler.IUserHandler;
+import com.emazon.api_user.application.handler.user.IUserHandler;
 import com.emazon.api_user.domain.exception.*;
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
+import com.emazon.api_user.infraestructure.output.util.JwtService;
 import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -138,7 +138,7 @@ class ControllerUserAdvisorTest {
     @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenDateTimeParseException_thenReturnsConflict() throws Exception {
         DateTimeParseException dateTimeParseException = new DateTimeParseException(ConstantsInfTest.DATE_TIME,
-                ConstantsInfTest.INPUT, ConstantsInfTest.VALUE_0);
+                ConstantsInfTest.INPUT, ConstantsInfTest.NUMBER_O);
 
         Mockito.doThrow(dateTimeParseException).when(userHandler)
                 .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
@@ -151,4 +151,17 @@ class ControllerUserAdvisorTest {
                         .value(ConstantsInfTest.DATE_TIME));
     }
 
+    @Test
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
+    void whenCredentialsException_thenReturnsUnauthorized() throws Exception {
+        Mockito.doThrow(new CredentialsException()).when(userHandler)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(ConstantsInfTest.JSON_REQUEST))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.INCORRECT_DATA));
+    }
 }

@@ -94,4 +94,11 @@ public class ControllerUserAdvisor {
                 ExceptionResponseConstants.FORMAT_DATE_INVALID.getMessage(),
                 HttpStatus.BAD_REQUEST.toString()));
     }
+
+    @ExceptionHandler(CredentialsException.class)
+    public ResponseEntity<ExceptionResponse> handleCredentialsException (CredentialsException  exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionResponse(
+                ExceptionResponseConstants.INCORRECT_DATA.getMessage(),
+                HttpStatus.UNAUTHORIZED.toString()));
+    }
 }

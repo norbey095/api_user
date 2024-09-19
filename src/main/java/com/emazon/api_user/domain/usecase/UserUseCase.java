@@ -6,7 +6,7 @@ import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.domain.model.UserSave;
 import com.emazon.api_user.domain.spi.IRolPersistencePort;
 import com.emazon.api_user.domain.spi.IUserPersistencePort;
-import com.emazon.api_user.domain.util.Constants;
+import com.emazon.api_user.domain.util.ConstantsUseCase;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -34,20 +34,20 @@ public class UserUseCase implements IUserServicePort {
     }
 
     private void isIntegerDocument(String value) {
-        if (!value.matches(Constants.REGEX_DOCUMENT)) {
+        if (!value.matches(ConstantsUseCase.REGEX_DOCUMENT)) {
             throw new DocumentInvalidException();
         }
     }
 
     private void validateEmailStructure(String email){
-        Matcher matcher = Constants.EMAIL_PATTERN.matcher(email);
+        Matcher matcher = ConstantsUseCase.EMAIL_PATTERN.matcher(email);
         if (!matcher.matches()) {
             throw new UserEmailInvalidException();
         }
     }
 
     private void validPhoneStructure(String phoneNumber) {
-        Matcher matcher = Constants.PHONE_PATTERN.matcher(phoneNumber);
+        Matcher matcher = ConstantsUseCase.PHONE_PATTERN.matcher(phoneNumber);
         if (!matcher.matches()) {
             throw new PhoneNumberinvalidException();
         }
@@ -57,7 +57,7 @@ public class UserUseCase implements IUserServicePort {
         LocalDate today = LocalDate.now();
         int age = Period.between(birthDate, today).getYears();
 
-        if(age < Constants.VALUE_18){
+        if(age < ConstantsUseCase.ADULT){
             throw new MinorInvalidException();
         }
     }
@@ -90,9 +90,9 @@ public class UserUseCase implements IUserServicePort {
     }
 
     String getRol(String role) {
-        if(role.equals(Constants.AUX_WAREHOUSE)){
-            return Constants.AUX_WAREHOUSE;
+        if(role.equals(ConstantsUseCase.ROLE_AUX_WAREHOUSE)){
+            return ConstantsUseCase.ROLE_AUX_WAREHOUSE;
         }
-        return Constants.CLIENT;
+        return ConstantsUseCase.ROLE_CLIENT;
     }
 }
