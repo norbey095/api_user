@@ -57,7 +57,7 @@ class JwtServiceTest {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) ConstantsInfTest.VALUE_100 * ConstantsInfTest.VALUE_60 * ConstantsInfTest.VALUE_60)))
+                        ((long) ConstantsInfTest.EXPIRATION_TIME)))
                 .signWith(secretKey)
                 .compact();
 
@@ -73,7 +73,7 @@ class JwtServiceTest {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) ConstantsInfTest.VALUE_100 * ConstantsInfTest.VALUE_60 * ConstantsInfTest.VALUE_60)))
+                        ((long) ConstantsInfTest.EXPIRATION_TIME)))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
 
@@ -91,7 +91,7 @@ class JwtServiceTest {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) ConstantsInfTest.VALUE_100 * ConstantsInfTest.VALUE_60 * ConstantsInfTest.VALUE_60)))
+                        ((long) ConstantsInfTest.EXPIRATION_TIME)))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
 

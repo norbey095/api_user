@@ -1,6 +1,6 @@
 package com.emazon.api_user.infraestructure.output.util;
 
-import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
+import com.emazon.api_user.infraestructure.util.ConstantsOutput;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,7 +21,7 @@ public class JwtService {
 
     private final String secretKey;
 
-    public JwtService(@Value(ConstantsInfraestructure.JWT_SECRET) String secretKey) {
+    public JwtService(@Value(ConstantsOutput.JWT_SECRET) String secretKey) {
         this.secretKey = secretKey;
     }
 
@@ -32,7 +32,7 @@ public class JwtService {
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) ConstantsInfraestructure.VALUE_100 * ConstantsInfraestructure.VALUE_60 * ConstantsInfraestructure.VALUE_24)))
+                        ((long) ConstantsOutput.EXPIRATION_TIME)))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

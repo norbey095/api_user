@@ -138,7 +138,7 @@ class ControllerUserAdvisorTest {
     @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void whenDateTimeParseException_thenReturnsConflict() throws Exception {
         DateTimeParseException dateTimeParseException = new DateTimeParseException(ConstantsInfTest.DATE_TIME,
-                ConstantsInfTest.INPUT, ConstantsInfTest.VALUE_0);
+                ConstantsInfTest.INPUT, ConstantsInfTest.NUMBER_O);
 
         Mockito.doThrow(dateTimeParseException).when(userHandler)
                 .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));

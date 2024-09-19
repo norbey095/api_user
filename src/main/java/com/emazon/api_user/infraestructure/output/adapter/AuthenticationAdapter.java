@@ -4,7 +4,7 @@ import com.emazon.api_user.domain.model.UserAuth;
 import com.emazon.api_user.domain.spi.IAthenticationPersistencePort;
 import com.emazon.api_user.infraestructure.output.util.JwtService;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
-import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
+import com.emazon.api_user.infraestructure.util.ConstantsOutput;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -51,7 +51,7 @@ public class AuthenticationAdapter implements IAthenticationPersistencePort {
 
     private Map<String, Object> generateExtraClaims(UserAuth user) {
         Map<String, Object> extraClaims = new HashMap<>();
-        extraClaims.put(ConstantsInfraestructure.AUTHORITIES, ConstantsInfraestructure.ROLE + user.getRole());
+        extraClaims.put(ConstantsOutput.AUTHORITIES, ConstantsOutput.ROLE + user.getRole());
         return extraClaims;
     }
 }

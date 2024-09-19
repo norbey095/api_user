@@ -2,7 +2,7 @@ package com.emazon.api_user.infraestructure.configuration.securityconfig.jwtconf
 
 import com.emazon.api_user.infraestructure.exceptionhandler.ExceptionResponse;
 import com.emazon.api_user.infraestructure.output.util.JwtService;
-import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
+import com.emazon.api_user.infraestructure.util.ConstantsConfiguration;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -34,14 +34,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            final String authHeader = request.getHeader(ConstantsInfraestructure.AUTHORIZATION);
+            final String authHeader = request.getHeader(ConstantsConfiguration.AUTHORIZATION);
             final String jwt;
             final String userName;
-            if (authHeader == null || !authHeader.startsWith(ConstantsInfraestructure.BEARER)) {
+            if (authHeader == null || !authHeader.startsWith(ConstantsConfiguration.BEARER)) {
                 filterChain.doFilter(request, response);
                 return;
             }
-            jwt = authHeader.substring(ConstantsInfraestructure.VALUE_7);
+            jwt = authHeader.substring(ConstantsConfiguration.SEVEN_LETTERS);
             userName = jwtService.extractUsername(jwt);
 
             if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -61,9 +61,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }  catch (Exception ex) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType(ConstantsInfraestructure.APPLICATION_JSON);
+            response.setContentType(ConstantsConfiguration.APPLICATION_JSON);
             response.getWriter().write(new ObjectMapper().writeValueAsString(new ExceptionResponse(
-                    ConstantsInfraestructure.TOKEN_INVALID,
+                    ConstantsConfiguration.TOKEN_INVALID,
                     HttpStatus.UNAUTHORIZED.toString()
             )));
             return;

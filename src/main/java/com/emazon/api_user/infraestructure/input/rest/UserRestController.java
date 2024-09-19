@@ -3,7 +3,7 @@ package com.emazon.api_user.infraestructure.input.rest;
 import com.emazon.api_user.application.dto.ResponseSuccess;
 import com.emazon.api_user.application.dto.UserRequestDto;
 import com.emazon.api_user.application.handler.user.IUserHandler;
-import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
+import com.emazon.api_user.infraestructure.util.ConstantsController;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -32,10 +32,10 @@ public class UserRestController {
             @ApiResponse(responseCode = "409", description = "user already exists", content = @Content),
             @ApiResponse(responseCode = "400", description = "Invalid fields", content = @Content)
     })
-    @PreAuthorize(ConstantsInfraestructure.HAS_ADMIN)
+    @PreAuthorize(ConstantsController.HAS_ADMIN)
     @PostMapping("/registryAux")
     public ResponseEntity<ResponseSuccess> createUserAux(@Valid @RequestBody UserRequestDto userRequestDto){
-        ResponseSuccess responseSuccess = userHandler.saveUser(userRequestDto, ConstantsInfraestructure.ROLE_AUX_WAREHOUSE);
+        ResponseSuccess responseSuccess = userHandler.saveUser(userRequestDto, ConstantsController.ROLE_AUX_WAREHOUSE);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(responseSuccess);
     }
@@ -47,10 +47,10 @@ public class UserRestController {
             @ApiResponse(responseCode = "409", description = "user already exists", content = @Content),
             @ApiResponse(responseCode = "400", description = "Invalid fields", content = @Content)
     })
-    @PreAuthorize(ConstantsInfraestructure.HAS_ADMIN)
+    @PreAuthorize(ConstantsController.HAS_ADMIN)
     @PostMapping("/registryClient")
     public ResponseEntity<ResponseSuccess> createUserClient(@Valid @RequestBody UserRequestDto userRequestDto){
-        ResponseSuccess responseSuccess = userHandler.saveUser(userRequestDto, ConstantsInfraestructure.ROLE_CLIENT);
+        ResponseSuccess responseSuccess = userHandler.saveUser(userRequestDto, ConstantsController.ROLE_CLIENT);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(responseSuccess);
     }

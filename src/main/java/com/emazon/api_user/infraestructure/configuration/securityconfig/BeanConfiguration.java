@@ -1,6 +1,6 @@
 package com.emazon.api_user.infraestructure.configuration.securityconfig;
 
-import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
+import com.emazon.api_user.infraestructure.util.ConstantsConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,7 +40,7 @@ public class BeanConfiguration {
     @Bean
     public UserDetailsService userDetailsService() {
         return userEmail -> userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException(ConstantsInfraestructure.USER_NOT_FOUND_POINTS));
+                .orElseThrow(() -> new UsernameNotFoundException(ConstantsConfiguration.USER_NOT_FOUND_POINTS));
     }
 
     @Bean

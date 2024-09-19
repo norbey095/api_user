@@ -34,8 +34,7 @@ public class ConstantsInfTest {
     public static final String ADMIN = "ADMIN";
     public static final String EMAIL_EJEM = "test@example.com";
     public static final String NAME_INVALID = "The extracted username is not the expected one.";
-    public static final Integer VALUE_100 = 1000;
-    public static final Integer VALUE_60 = 60;
+    public static final Integer EXPIRATION_TIME = 1000*60*24;
     public static final String TOKEN_VALID = "Token válid.";
     public static final String TOKEN_INVALID = "Token Inválid.";
     public static final String ROL_NAME_AUXILIAR= "ROLE_Auxiliar";
@@ -45,8 +44,8 @@ public class ConstantsInfTest {
     public static final String INAUTHORIZATION= "Incorrect login information";
     public static final String DATE_TIME= "The date format is invalid, the format is yyyy-mm-dd";
     public static final String INPUT= "INPUT";
-    public static final Integer VALUE_0= 0;
-    public static final Integer VALUE_1= 1;
+    public static final Integer NUMBER_O= 0;
+    public static final Integer NUMBER_1= 1;
     public static final String URL_CLIENT= "/user/registryClient";
     public static final String INCORRECT_DATA = "Incorrect login information";
     public static final String ACCESS_DENE = "Access denied";

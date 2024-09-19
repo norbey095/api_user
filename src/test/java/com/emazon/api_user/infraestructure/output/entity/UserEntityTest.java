@@ -31,7 +31,7 @@ class UserEntityTest {
         Collection<? extends GrantedAuthority> authorities = userEntity.getAuthorities();
 
         assertNotNull(authorities);
-        assertEquals(ConstantsInfTest.VALUE_1, authorities.size());
+        assertEquals(ConstantsInfTest.NUMBER_1, authorities.size());
         assertEquals(ConstantsInfTest.ROL_NAME_AUXILIAR, authorities.iterator().next().getAuthority());
     }
 
