@@ -35,9 +35,9 @@ class AuthenticationUseCaseTest {
 
         authenticationUseCase.authentication(ConstantsDomainTest.EMAIL,ConstantsDomainTest.PASSWORD);
 
-        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .authenticate(ConstantsDomainTest.EMAIL,ConstantsDomainTest.PASSWORD);
-        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .getToken(Mockito.any(UserAuth.class));
     }
 
@@ -51,9 +51,9 @@ class AuthenticationUseCaseTest {
         });
 
 
-        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_1))
+        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_1_CALL))
                 .authenticate(ConstantsDomainTest.EMAIL,ConstantsDomainTest.PASSWORD);
-        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VALUE_0))
+        Mockito.verify(athenticationPersistencePort, Mockito.times(ConstantsDomainTest.VERIFY_0_CALL))
                 .getToken(Mockito.any(UserAuth.class));
     }
 }
