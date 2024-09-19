@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: api_user
+  datasource:
+    url: jdbc:mysql://localhost:3306/user_db
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    spring.jpa.hibernate.ddl-auto: update
+    spring.jpa.show-sql: true
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 9091
+
+
+appDescription: "User API"
+appVersion: "1.0.0"
