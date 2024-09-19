@@ -4,7 +4,7 @@ import com.emazon.api_user.application.dto.authentication.AuthenticationRequestD
 import com.emazon.api_user.application.dto.authentication.AuthenticationResponseDto;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.AuthenticationService;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,17 +31,17 @@ class AuthenticationControllerTest {
     private JwtService jwtService;
 
     @Test
-    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
     void createUser_ShouldReturnStatusCreated() throws Exception {
         AuthenticationRequestDto authenticationRequestDto = new AuthenticationRequestDto();
-        AuthenticationResponseDto authenticationResponseDto = new AuthenticationResponseDto(Constans.ROL_DESCRIPTION);
+        AuthenticationResponseDto authenticationResponseDto = new AuthenticationResponseDto(ConstantsInfTest.ROL_DESCRIPTION);
 
         Mockito.when(authenticationService.authenticate(authenticationRequestDto))
                 .thenReturn(authenticationResponseDto);
 
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_AUTHENTICATION)
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_AUTHENTICATION)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(Constans.JSON_REQUEST))
+                        .content(ConstantsInfTest.JSON_REQUEST))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

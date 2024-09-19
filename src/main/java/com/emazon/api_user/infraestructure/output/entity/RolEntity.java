@@ -1,6 +1,6 @@
 package com.emazon.api_user.infraestructure.output.entity;
 
-import com.emazon.api_user.infraestructure.output.util.Constants;
+import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +20,6 @@ public class RolEntity {
     private Integer id;
     private String name;
     private String description;
-    @OneToMany(mappedBy = Constants.ROL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = ConstantsInfraestructure.ROL, fetch = FetchType.LAZY)
     private List<UserEntity> users;
 }

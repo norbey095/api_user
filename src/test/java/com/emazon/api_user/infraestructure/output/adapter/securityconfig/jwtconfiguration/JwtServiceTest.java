@@ -1,6 +1,6 @@
 package com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration;
 
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -42,12 +42,12 @@ class JwtServiceTest {
     @Test
     void testGenerateToken() {
         List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(Constans.ADMIN));
+        authorities.add(new SimpleGrantedAuthority(ConstantsInfTest.ADMIN));
 
         Mockito.doReturn(authorities).when(userDetails)
                 .getAuthorities();
 
-        String email = Constans.EMAIL_EJEM;
+        String email = ConstantsInfTest.EMAIL_EJEM;
         String token = jwtService.generateToken(email, userDetails);
 
         assertTrue(token != null && !token.isEmpty());
@@ -55,28 +55,28 @@ class JwtServiceTest {
 
     @Test
     void testExtractUsername() {
-        String username = Constans.EMAIL_EJEM;
+        String username = ConstantsInfTest.EMAIL_EJEM;
         String token = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) Constans.VALUE_100 * Constans.VALUE_60 * Constans.VALUE_60)))
+                        ((long) ConstantsInfTest.VALUE_100 * ConstantsInfTest.VALUE_60 * ConstantsInfTest.VALUE_60)))
                 .signWith(secretKey)
                 .compact();
 
         String extractedUsername = jwtService.extractUsername(token);
 
-        assertEquals(username, extractedUsername, Constans.NAME_INVALID);
+        assertEquals(username, extractedUsername, ConstantsInfTest.NAME_INVALID);
     }
 
     @Test
     void testIsTokenValid_ValidToken_ReturnsTrue() {
-        String username = Constans.EMAIL_EJEM;
+        String username = ConstantsInfTest.EMAIL_EJEM;
         String token = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) Constans.VALUE_100 * Constans.VALUE_60 * Constans.VALUE_60)))
+                        ((long) ConstantsInfTest.VALUE_100 * ConstantsInfTest.VALUE_60 * ConstantsInfTest.VALUE_60)))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
 
@@ -84,24 +84,24 @@ class JwtServiceTest {
 
         boolean isValid = jwtService.isTokenValid(token, userDetails);
 
-        assertTrue(isValid, Constans.TOKEN_VALID);
+        assertTrue(isValid, ConstantsInfTest.TOKEN_VALID);
     }
 
     @Test
     void testIsTokenValid_InvalidToken_ReturnsFalse() {
-        String username = Constans.EMAIL_EJEM;
+        String username = ConstantsInfTest.EMAIL_EJEM;
         String token = Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) Constans.VALUE_100 * Constans.VALUE_60 * Constans.VALUE_60)))
+                        ((long) ConstantsInfTest.VALUE_100 * ConstantsInfTest.VALUE_60 * ConstantsInfTest.VALUE_60)))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
 
-        Mockito.when(userDetails.getUsername()).thenReturn(Constans.EMAIL);
+        Mockito.when(userDetails.getUsername()).thenReturn(ConstantsInfTest.EMAIL);
 
         boolean isValid = jwtService.isTokenValid(token, userDetails);
 
-        assertFalse(isValid, Constans.TOKEN_INVALID);
+        assertFalse(isValid, ConstantsInfTest.TOKEN_INVALID);
     }
 }

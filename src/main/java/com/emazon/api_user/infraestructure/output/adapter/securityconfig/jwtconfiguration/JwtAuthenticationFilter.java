@@ -1,7 +1,7 @@
 package com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration;
 
 import com.emazon.api_user.infraestructure.exceptionhandler.ExceptionResponse;
-import com.emazon.api_user.infraestructure.output.util.Constants;
+import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -33,14 +33,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
         try {
-            final String authHeader = request.getHeader(Constants.AUTHORIZATION);
+            final String authHeader = request.getHeader(ConstantsInfraestructure.AUTHORIZATION);
             final String jwt;
             final String userName;
-            if (authHeader == null || !authHeader.startsWith(Constants.BEARER)) {
+            if (authHeader == null || !authHeader.startsWith(ConstantsInfraestructure.BEARER)) {
                 filterChain.doFilter(request, response);
                 return;
             }
-            jwt = authHeader.substring(Constants.VALUE_7);
+            jwt = authHeader.substring(ConstantsInfraestructure.VALUE_7);
             userName = jwtService.extractUsername(jwt);
 
             if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
@@ -60,9 +60,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }  catch (Exception ex) {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.setContentType(Constants.APPLICATION_JSON);
+            response.setContentType(ConstantsInfraestructure.APPLICATION_JSON);
             response.getWriter().write(new ObjectMapper().writeValueAsString(new ExceptionResponse(
-                    Constants.TOKEN_INVALID,
+                    ConstantsInfraestructure.TOKEN_INVALID,
                     HttpStatus.UNAUTHORIZED.toString()
             )));
             return;

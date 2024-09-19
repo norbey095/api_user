@@ -1,11 +1,11 @@
 package com.emazon.api_user.apilication.handler;
 
+import com.emazon.api_user.apilication.util.ConstantsApplicationTest;
 import com.emazon.api_user.application.dto.UserRequestDto;
 import com.emazon.api_user.application.handler.UserHandler;
 import com.emazon.api_user.application.mapper.UserMapper;
 import com.emazon.api_user.domain.api.IUserServicePort;
 import com.emazon.api_user.domain.model.UserSave;
-import com.emazon.api_user.domain.util.ConstantsDomain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -34,35 +34,46 @@ class UserHandlerTest {
     public void setup() {
         MockitoAnnotations.openMocks(this);
         userRequestDto = UserRequestDto.builder()
-                .name(ConstantsDomain.NAME)
-                .lastName(ConstantsDomain.LAST_NAME)
-                .documentNumber(ConstantsDomain.DOCUMENT)
-                .cellPhone(ConstantsDomain.CELLPHONE)
-                .birthdate(ConstantsDomain.BIRTHDATE)
-                .email(ConstantsDomain.EMAIL)
-                .password(ConstantsDomain.PASSWORD)
+                .name(ConstantsApplicationTest.NAME)
+                .lastName(ConstantsApplicationTest.LAST_NAME)
+                .documentNumber(ConstantsApplicationTest.DOCUMENT)
+                .cellPhone(ConstantsApplicationTest.CELLPHONE)
+                .birthdate(ConstantsApplicationTest.BIRTHDATE)
+                .email(ConstantsApplicationTest.EMAIL)
+                .password(ConstantsApplicationTest.PASSWORD)
                 .build();
 
         userSave = UserSave.builder()
-                .setName(ConstantsDomain.NAME)
-                .setLastName(ConstantsDomain.LAST_NAME)
-                .setDocumentNumber(ConstantsDomain.DOCUMENT)
-                .setCellPhone(ConstantsDomain.CELLPHONE)
-                .setBirthdate(ConstantsDomain.BIRTHDATE)
-                .setEmail(ConstantsDomain.EMAIL)
-                .setPassword(ConstantsDomain.PASSWORD)
+                .setName(ConstantsApplicationTest.NAME)
+                .setLastName(ConstantsApplicationTest.LAST_NAME)
+                .setDocumentNumber(ConstantsApplicationTest.DOCUMENT)
+                .setCellPhone(ConstantsApplicationTest.CELLPHONE)
+                .setBirthdate(ConstantsApplicationTest.BIRTHDATE)
+                .setEmail(ConstantsApplicationTest.EMAIL)
+                .setPassword(ConstantsApplicationTest.PASSWORD)
                 .build();
     }
 
     @Test
-    void shouldSaveUser() {
+    void shouldSaveUserAux() {
         when(userMapper.userRequestDtoToUserSave(userRequestDto)).thenReturn(userSave);
 
-        userHandler.saveUser(userRequestDto);
+        userHandler.saveUser(userRequestDto, ConstantsApplicationTest.ROLE_AUX);
 
 
         verify(userMapper).userRequestDtoToUserSave(userRequestDto);
-        verify(userServicePort).saveUser(userSave);
+        verify(userServicePort).saveUser(userSave, ConstantsApplicationTest.ROLE_AUX);
+    }
+
+    @Test
+    void shouldSaveUserClient() {
+        when(userMapper.userRequestDtoToUserSave(userRequestDto)).thenReturn(userSave);
+
+        userHandler.saveUser(userRequestDto, ConstantsApplicationTest.ROLE_CLIENT);
+
+
+        verify(userMapper).userRequestDtoToUserSave(userRequestDto);
+        verify(userServicePort).saveUser(userSave, ConstantsApplicationTest.ROLE_CLIENT);
     }
 
 }

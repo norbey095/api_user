@@ -1,6 +1,6 @@
 package com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration;
 
-import com.emazon.api_user.infraestructure.output.util.Constants;
+import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.validation.constraints.NotNull;
@@ -25,7 +25,7 @@ public class JwtService {
 
     private final String secretKey;
 
-    public JwtService(@Value(Constants.JWT_SECRET) String secretKey) {
+    public JwtService(@Value(ConstantsInfraestructure.JWT_SECRET) String secretKey) {
         this.secretKey = secretKey;
     }
 
@@ -33,8 +33,8 @@ public class JwtService {
         Map<String, Object> claims = new HashMap<>();
         String authorities = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(Constants.COMA));
-        claims.put(Constants.AUTHORITIES, authorities);
+                .collect(Collectors.joining(ConstantsInfraestructure.COMA));
+        claims.put(ConstantsInfraestructure.AUTHORITIES, authorities);
 
         return Jwts
                 .builder()
@@ -42,7 +42,7 @@ public class JwtService {
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() +
-                        ((long) Constants.VALUE_100 * Constants.VALUE_60 * Constants.VALUE_24)))
+                        ((long) ConstantsInfraestructure.VALUE_100 * ConstantsInfraestructure.VALUE_60 * ConstantsInfraestructure.VALUE_24)))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

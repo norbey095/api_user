@@ -4,7 +4,7 @@ import com.emazon.api_user.domain.model.UserSave;
 import com.emazon.api_user.domain.spi.IUserPersistencePort;
 import com.emazon.api_user.infraestructure.output.mapper.UserEntityMapper;
 import com.emazon.api_user.infraestructure.output.repository.IUserRepository;
-import com.emazon.api_user.infraestructure.output.util.PasswordUtil;
+import com.emazon.api_user.infraestructure.util.PasswordUtil;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
