@@ -22,7 +22,6 @@ public class ConstantsInfTest {
     public static final String NAME = "Duvan";
     public static final String LAST_NAME = "Sanchez";
     public static final String DOCUMENT = "120142541";
-    public static final String CELLPHONE = "3254557253";
     public static final LocalDate BIRTHDATE=  LocalDate.of(2000, 9, 4);
     public static final String EMAIL = "duvan123@gmail.com";
     public static final String PASSWORD= "1234";
@@ -43,14 +42,14 @@ public class ConstantsInfTest {
     public static final String URL_AUTHENTICATION= "/auth/login";
     public static final String AUTHORIZATION= "authorization";
     public static final String JWTTOKEN = "jwtToken";
-    public static final String PASSWORD_NAME = "password";
     public static final String INAUTHORIZATION= "Incorrect login information";
     public static final String DATE_TIME= "The date format is invalid, the format is yyyy-mm-dd";
     public static final String INPUT= "INPUT";
     public static final Integer VALUE_0= 0;
-    public static final String USER_NOT_FOUND_POINTS = "User not found: ";
     public static final Integer VALUE_1= 1;
     public static final String URL_CLIENT= "/user/registryClient";
+    public static final String INCORRECT_DATA = "Incorrect login information";
+    public static final String ACCESS_DENE = "Access denied";
 
 
     private ConstantsInfTest() {

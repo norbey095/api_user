@@ -6,7 +6,6 @@ public class ConstantsInfraestructure {
     public static final String BEARER = "Bearer ";
     public static final Integer VALUE_7 = 7;
     public static final String JWT_SECRET = "${jwt.secret}";
-    public static final String COMA = ",";
     public static final String AUTHORITIES = "authorities";
     public static final Integer VALUE_100 = 1000;
     public static final Integer VALUE_60 = 60;

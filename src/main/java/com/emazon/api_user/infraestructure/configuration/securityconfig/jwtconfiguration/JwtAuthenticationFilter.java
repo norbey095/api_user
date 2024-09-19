@@ -1,6 +1,7 @@
-package com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration;
+package com.emazon.api_user.infraestructure.configuration.securityconfig.jwtconfiguration;
 
 import com.emazon.api_user.infraestructure.exceptionhandler.ExceptionResponse;
+import com.emazon.api_user.infraestructure.output.util.JwtService;
 import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;

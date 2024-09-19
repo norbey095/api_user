@@ -2,7 +2,7 @@ package com.emazon.api_user.infraestructure.input.rest;
 
 import com.emazon.api_user.application.dto.ResponseSuccess;
 import com.emazon.api_user.application.dto.UserRequestDto;
-import com.emazon.api_user.application.handler.IUserHandler;
+import com.emazon.api_user.application.handler.user.IUserHandler;
 import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

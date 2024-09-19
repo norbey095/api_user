@@ -2,8 +2,8 @@ package com.emazon.api_user.infraestructure.input.rest;
 
 import com.emazon.api_user.application.dto.ResponseSuccess;
 import com.emazon.api_user.application.dto.UserRequestDto;
-import com.emazon.api_user.application.handler.IUserHandler;
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
+import com.emazon.api_user.application.handler.user.IUserHandler;
+import com.emazon.api_user.infraestructure.output.util.JwtService;
 import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

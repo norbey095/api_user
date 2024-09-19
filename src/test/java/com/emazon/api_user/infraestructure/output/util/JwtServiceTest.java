@@ -1,4 +1,4 @@
-package com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration;
+package com.emazon.api_user.infraestructure.output.util;
 
 import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import io.jsonwebtoken.Jwts;
@@ -15,10 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.crypto.SecretKey;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,7 +45,7 @@ class JwtServiceTest {
                 .getAuthorities();
 
         String email = ConstantsInfTest.EMAIL_EJEM;
-        String token = jwtService.generateToken(email, userDetails);
+        String token = jwtService.generateToken(email, new HashMap<>());
 
         assertTrue(token != null && !token.isEmpty());
     }
