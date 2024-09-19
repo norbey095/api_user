@@ -77,15 +77,15 @@ public class UserUseCase implements IUserServicePort {
                 .setBirthdate(userSave.getBirthdate())
                 .setEmail(userSave.getEmail())
                 .setPassword(this.userPersistencePort.encryptedPassword(userSave.getPassword()))
-                .setIdRol(getIdRol())
+                .setRol(getRol())
                 .build();
     }
 
-    private Integer getIdRol(){
+    private RolSave getRol(){
         RolSave rolSave =  this.rolPersistencePort.getRolByName(Constans.AUX_BODEGA);
         if(rolSave == null){
             throw new RolAuxBodegaInvalidException();
         }
-        return rolSave.getId();
+        return rolSave;
     }
 }

@@ -14,7 +14,7 @@ public class ConstantsDomain {
     public static final Integer ROL_ID= 1;
     public static final String ROL_NAME= "Auxiliar";
     public static final String ROL_DESCRIPTION= "Auxiliar";
-    public static final String AUX_BODEGA = "aux_bodega";
+    public static final String AUX_BODEGA = "AUX_WAREHOUSE";
     public static final Integer VALUE_1 = 1;
     public static final Integer VALUE_0 = 0;
     public static final boolean VALUE_TRUE = true;
