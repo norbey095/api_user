@@ -1,5 +1,6 @@
 package com.emazon.api_user.infraestructure.configuration.securityconfig;
 
+import com.emazon.api_user.infraestructure.output.repository.IUserRepository;
 import com.emazon.api_user.infraestructure.util.ConstantsConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +22,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class BeanConfiguration {
 
-    private final com.emazon.api_user.infraestructure.output.repository.IUserRepository userRepository;
+    private final IUserRepository userRepository;
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
